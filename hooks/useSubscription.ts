@@ -1,5 +1,4 @@
-import dayjs from "dayjs";
-import { addDoc, deleteDoc, doc } from "firebase/firestore";
+import { addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { UserContext } from "../components/Auth";
 import { db, dbCollection } from "../services/firebase";
@@ -10,6 +9,7 @@ interface IProps {}
 interface IReturn {
   loading: boolean;
   create: (sub: Omit<ISubscription, "id">) => void;
+  update: (sub: ISubscription) => void;
   deleteS: (id: string) => void;
 }
 
@@ -38,9 +38,23 @@ export const useSubcription = (props: IProps): IReturn => {
     }
   };
 
+  const update = async (sub: ISubscription) => {
+    if (user?.email) {
+      setLoading(true);
+      const docRef = doc(dbCollection("subscriptions"), sub.id);
+      await updateDoc(docRef, {
+        ...sub,
+        firstPayment: sub.firstPayment.toDate().getTime(),
+        accountId: user?.email,
+      });
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     create,
+    update,
     deleteS,
   };
 };
