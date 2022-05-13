@@ -3,20 +3,11 @@ import {
   Badge,
   Button,
   Card,
-  CardSection,
-  Center,
   Group,
-  InputWrapper,
   Kbd,
-  MultiSelect,
-  NumberInput,
-  Select,
   Text,
-  TextInput,
   Timeline,
-  useMantineTheme,
 } from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
 import dayjs from "dayjs";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -45,7 +36,6 @@ const ID: NextPage = () => {
   const [timeBeforePayment, setTimeBeforePayment] = useState("");
 
   const router = useRouter();
-  const theme = useMantineTheme();
 
   const subs = subscriptions.find((s) => s.id === router.query.id);
 
@@ -207,6 +197,14 @@ const ID: NextPage = () => {
                 Supprimer
               </Button>
             )}
+            <Button
+              variant="subtle"
+              color="grey"
+              loading={loading}
+              onClick={() => router.push(`/edit/${subs.id}`)}
+            >
+              Modifier
+            </Button>
           </Group>
         </div>
       </main>

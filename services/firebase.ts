@@ -1,13 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  DocumentSnapshot,
-} from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { ISubscription } from "../typings/Subscriptions";
 
 // tslint:disable-next-line: ban-types
 const config = JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_CONFIG ?? "");
