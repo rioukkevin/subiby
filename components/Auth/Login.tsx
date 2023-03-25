@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { auth, provider } from "../../services/firebase";
-import { signInWithRedirect } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { Button, Center } from "@mantine/core";
 
 interface IProps {
@@ -12,7 +12,7 @@ export const Login: FC<IProps> = (props) => {
   const { loading } = props;
 
   const handleLogin = () => {
-    signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider);
   };
 
   return (
